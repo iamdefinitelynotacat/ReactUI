@@ -1,8 +1,8 @@
-import { taskStatus } from "./taskStatus";
+import { taskStatus } from './taskStatus';
 
 export type taskEntity = {
-    key: string;
-    name: string;
-    priority: number;
-    status: taskStatus;
-  };
+  key: string;
+  name: string;
+  priority: number;
+  status: taskStatus;
+};
