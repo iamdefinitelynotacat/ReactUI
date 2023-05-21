@@ -1,11 +1,11 @@
 
 import './App.css';
-import MainTable from './components/MainTable';
+import TaskTable from './components/TaskTable';
 
 
 function App() {
   return (
-        <MainTable/>
+        <TaskTable/>
   );
 }
 

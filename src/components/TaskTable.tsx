@@ -5,19 +5,19 @@ import {
   QueryClientProvider,
 
 } from '@tanstack/react-query';
-import { MainTableWithoutQueryClient } from './MainTableWithoutQueryClient';
+import { TaskTableWithoutQueryClient } from './TaskTableWithoutQueryClient';
 
 const queryClient = new QueryClient();
 
-const MainTable = () => (
+const TaskTable = () => (
 
   <QueryClientProvider client={queryClient}>
 
-    <MainTableWithoutQueryClient />
+    <TaskTableWithoutQueryClient />
 
   </QueryClientProvider>
 
 );
 
 
-export default MainTable;
+export default TaskTable;

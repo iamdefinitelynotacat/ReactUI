@@ -9,26 +9,26 @@ import {
     NumberInput,
     Select
   } from '@mantine/core';
-import { Props } from './Props';
+import { iNewTaskModal } from './iNewTaskModal';
 import { Task } from './Task';
-import { isNameValid } from './IsNameValid';
-import { convertStatusToString } from './StatusToStringConvertor';
+import { taskValidation } from './taskValidation';
+import { convertStatusToString } from './convertStatusToString';
 import { Status } from './Status';
 
 //opens new modal for the creation of tasks
-export const CreateNewTaskModal = ({
+export const NewTaskModal = ({
     open,
     data,    
     onClose,
     onSubmit,
-  }: Props) => {
+  }: iNewTaskModal) => {
     const [task, setTask] = useState<Task>({priority: 0} as Task);
     const [error, setError] = useState<string | undefined>();
 
     const handleSubmit = () => {
 
       
-      if (!isNameValid(data, task.name))
+      if (!taskValidation(data, task.name))
       {
           return;
       }
@@ -58,7 +58,7 @@ export const CreateNewTaskModal = ({
                 onChange={(e) =>
                   {
                     task.name = e.target.value;
-                    setError(!isNameValid(data, task.name)? "Name already exists" : undefined );
+                    setError(!taskValidation(data, task.name)? "Name already exists" : undefined );
                     setTask(task);
                   }
                 }

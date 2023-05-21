@@ -15,15 +15,15 @@ import {
 import {useQuery} from '@tanstack/react-query';
 import { IconTrash, IconEdit, IconRefresh } from '@tabler/icons-react';
 import { Task } from './Task';
-import { CreateNewTaskModal } from './CreateNewTaskModal';
-import { isNameValid } from './IsNameValid';
-import { convertStatusToString } from './StatusToStringConvertor';
+import { NewTaskModal } from './NewTaskModal';
+import { taskValidation } from './taskValidation';
+import { convertStatusToString } from './convertStatusToString';
 
 //Url for my test API
 const apiUrl = 'http://localhost:5260';
 
 //Creates MainTable
-export const MainTableWithoutQueryClient = () => {
+export const TaskTableWithoutQueryClient = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [validationErrors, setValidationErrors] = useState<{[cellId: string]: string;}>({});
 
@@ -108,7 +108,7 @@ export const MainTableWithoutQueryClient = () => {
         error: validationErrors[cell.id],
         onBlur: (event) => {
 
-          const isValid = cell.column.id === 'name' ? isNameValid(data?.filter(task => task.key !== cell.row.getValue('key')) ?? [], event.target.value) : true;
+          const isValid = cell.column.id === 'name' ? taskValidation(data?.filter(task => task.key !== cell.row.getValue('key')) ?? [], event.target.value) : true;
 
           if (!isValid) {
             //set validation error for cell if invalid
@@ -296,7 +296,7 @@ export const MainTableWithoutQueryClient = () => {
         }}
 
       />
-      <CreateNewTaskModal
+      <NewTaskModal
         data={data ?? []}
         open={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
