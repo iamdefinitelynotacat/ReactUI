@@ -10,10 +10,10 @@ import {
     Select
   } from '@mantine/core';
 import { iNewTaskModal } from './iNewTaskModal';
-import { Task } from './Task';
+import { taskEntity } from './taskEntity';
 import { taskValidation } from './taskValidation';
 import { convertStatusToString } from './convertStatusToString';
-import { Status } from './Status';
+import { taskStatus } from './taskStatus';
 
 //opens new modal for the creation of tasks
 export const NewTaskModal = ({
@@ -22,7 +22,7 @@ export const NewTaskModal = ({
     onClose,
     onSubmit,
   }: iNewTaskModal) => {
-    const [task, setTask] = useState<Task>({priority: 0} as Task);
+    const [task, setTask] = useState<taskEntity>({priority: 0} as taskEntity);
     const [error, setError] = useState<string | undefined>();
 
     const handleSubmit = () => {
@@ -82,9 +82,9 @@ export const NewTaskModal = ({
                   label={'status'}
                   name={'status'}
                   data={[
-                    { value: '0', label: convertStatusToString(Status.NotStarted) },
-                    { value: '1', label: convertStatusToString(Status.InProgress) },
-                    { value: '2', label: convertStatusToString(Status.Completed) },               
+                    { value: '0', label: convertStatusToString(taskStatus.NotStarted) },
+                    { value: '1', label: convertStatusToString(taskStatus.InProgress) },
+                    { value: '2', label: convertStatusToString(taskStatus.Completed) },               
                   ]}
                   onChange={(e) =>
                     {

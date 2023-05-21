@@ -1,13 +1,13 @@
-import { Status } from "./Status";
+import { taskStatus } from "./taskStatus";
 
-export function convertStatusToString(status: Status): string 
+export function convertStatusToString(status: taskStatus): string 
 {
     switch (status){
-        case Status.NotStarted:
+        case taskStatus.NotStarted:
             return 'Not Started';
-        case Status.InProgress:
+        case taskStatus.InProgress:
             return 'In Progress';
-        case Status.Completed:
+        case taskStatus.Completed:
             return 'Completed';
         default:
             return 'Unknown';

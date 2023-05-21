@@ -1,8 +1,8 @@
-import { Task } from './Task';
+import { taskEntity } from './taskEntity';
 
 export interface iNewTaskModal {
-  data: Task[];
+  data: taskEntity[];
   onClose: () => void;
-  onSubmit: (values: Task) => void;
+  onSubmit: (values: taskEntity) => void;
   open: boolean;
 }

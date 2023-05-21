@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import {useQuery} from '@tanstack/react-query';
 import { IconTrash, IconEdit, IconRefresh } from '@tabler/icons-react';
-import { Task } from './Task';
+import { taskEntity } from './taskEntity';
 import { NewTaskModal } from './NewTaskModal';
 import { taskValidation } from './taskValidation';
 import { convertStatusToString } from './convertStatusToString';
@@ -29,7 +29,7 @@ export const TaskTableWithoutQueryClient = () => {
 
   //fetch data using GET
   const { data, isError, isFetching, isLoading, refetch } =
-    useQuery<Task[]>({
+    useQuery<taskEntity[]>({
 
       queryKey: ['table-data'],      
 
@@ -39,7 +39,7 @@ export const TaskTableWithoutQueryClient = () => {
 
         const response = await fetch(fetchURL.href);
 
-        const json = (await response.json()) as Task[];
+        const json = (await response.json()) as taskEntity[];
 
         return json;
 
@@ -50,12 +50,12 @@ export const TaskTableWithoutQueryClient = () => {
     });
 
   //new row hanlder
-  const handleCreateNewRow = (values: Task) => {
+  const handleCreateNewRow = (values: taskEntity) => {
     addOrEditTask(values);
   };
 
   //POST to server
-  const addOrEditTask = (task: Task) => 
+  const addOrEditTask = (task: taskEntity) => 
   {
     const fetchURL = new URL('/Task', apiUrl); 
 
@@ -71,7 +71,7 @@ export const TaskTableWithoutQueryClient = () => {
   }
 
 
-  const handleSaveRowEdits: MantineReactTableProps<Task>['onEditingRowSave'] =
+  const handleSaveRowEdits: MantineReactTableProps<taskEntity>['onEditingRowSave'] =
     async ({ exitEditingMode, values }) => {
       if (!Object.keys(validationErrors).length) {
         addOrEditTask(values);
@@ -83,7 +83,7 @@ export const TaskTableWithoutQueryClient = () => {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = (row: MRT_Row<Task>) => 
+  const handleDeleteRow = (row: MRT_Row<taskEntity>) => 
   {
     if (!window.confirm(`Are you sure you want to delete Task named: ${row.getValue('name')}`)) {
       return;
@@ -102,8 +102,8 @@ export const TaskTableWithoutQueryClient = () => {
   //used for validation
   const getCommonEditTextInputProps = useCallback(
     (
-      cell: MRT_Cell<Task>,
-    ): MRT_ColumnDef<Task>['mantineEditTextInputProps'] => {
+      cell: MRT_Cell<taskEntity>,
+    ): MRT_ColumnDef<taskEntity>['mantineEditTextInputProps'] => {
       return {
         error: validationErrors[cell.id],
         onBlur: (event) => {
@@ -130,7 +130,7 @@ export const TaskTableWithoutQueryClient = () => {
   );
 
   //Column definitions
-  const columns = useMemo<MRT_ColumnDef<Task>[]>(
+  const columns = useMemo<MRT_ColumnDef<taskEntity>[]>(
     () => [
       {
 
