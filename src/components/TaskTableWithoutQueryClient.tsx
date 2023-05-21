@@ -18,6 +18,7 @@ import { taskEntity } from './taskEntity';
 import { NewTaskModal } from './NewTaskModal';
 import { taskValidation } from './taskValidation';
 import { convertStatusToString } from './convertStatusToString';
+import { getStatusColor } from './getStatusColor';
 
 //Url for my test API
 const apiUrl = 'http://localhost:5260';
@@ -177,14 +178,7 @@ export const TaskTableWithoutQueryClient = () => {
 
               sx={(theme) => ({
 
-                backgroundColor:
-                  cell.getValue<number>() === 0
-                    ? theme.colors.yellow[8]
-                    : cell.getValue<number>() === 1
-                    ? theme.colors.green[8]
-                   : cell.getValue<number>() === 2 ? 
-                   theme.colors.gray[8] : 
-                   theme.colors.red[8],
+                backgroundColor: getStatusColor(cell.getValue<number>(), theme),
 
                 borderRadius: '4px',
 
