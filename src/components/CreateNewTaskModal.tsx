@@ -12,6 +12,8 @@ import {
 import { Props } from './Props';
 import { Task } from './Task';
 import { isNameValid } from './IsNameValid';
+import { convertStatusToString } from './StatusToStringConvertor';
+import { Status } from './Status';
 
 //opens new modal for the creation of tasks
 export const CreateNewTaskModal = ({
@@ -80,9 +82,9 @@ export const CreateNewTaskModal = ({
                   label={'status'}
                   name={'status'}
                   data={[
-                    { value: '0', label: 'Not Started' },
-                    { value: '1', label: 'In Progress' },
-                    { value: '2', label: 'Completed' },               
+                    { value: '0', label: convertStatusToString(Status.NotStarted) },
+                    { value: '1', label: convertStatusToString(Status.InProgress) },
+                    { value: '2', label: convertStatusToString(Status.Completed) },               
                   ]}
                   onChange={(e) =>
                     {

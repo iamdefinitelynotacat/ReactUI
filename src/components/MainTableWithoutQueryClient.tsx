@@ -17,6 +17,7 @@ import { IconTrash, IconEdit, IconRefresh } from '@tabler/icons-react';
 import { Task } from './Task';
 import { CreateNewTaskModal } from './CreateNewTaskModal';
 import { isNameValid } from './IsNameValid';
+import { convertStatusToString } from './StatusToStringConvertor';
 
 //Url for my test API
 const apiUrl = 'http://localhost:5260';
@@ -170,7 +171,41 @@ export const MainTableWithoutQueryClient = () => {
           ...getCommonEditTextInputProps(cell),
           type: 'email',
         }),
-      }
+        Cell: ({ cell }) => (
+
+            <Box
+
+              sx={(theme) => ({
+
+                backgroundColor:
+                  cell.getValue<number>() === 0
+                    ? theme.colors.yellow[8]
+                    : cell.getValue<number>() === 1
+                    ? theme.colors.green[8]
+                   : cell.getValue<number>() === 2 ? 
+                   theme.colors.gray[8] : 
+                   theme.colors.red[8],
+
+                borderRadius: '4px',
+
+                color: '#fff',
+
+                maxWidth: '9ch',
+
+                padding: '4px',
+
+              })}
+
+            >
+
+              {
+             convertStatusToString(cell.getValue<number>())              
+              }
+
+            </Box>
+          ),
+
+        },      
     ],
     [getCommonEditTextInputProps],
   );
