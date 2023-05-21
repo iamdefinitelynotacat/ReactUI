@@ -13,7 +13,7 @@ import { Props } from './Props';
 import { Task } from './Task';
 import { isNameValid } from './IsNameValid';
 
-//example of creating a mantine dialog modal for creating new rows
+//opens new modal for the creation of tasks
 export const CreateNewTaskModal = ({
     open,
     data,    
